@@ -33,6 +33,50 @@ in your IDE's toolbar or run it directly from the terminal:
       .\gradlew.bat :composeApp:jsBrowserDevelopmentRun
       ```
 
+### Build for Production (GitHub Pages)
+
+To build the production version for deployment:
+
+```shell
+.\gradlew.bat wasmJsBrowserDistribution
+```
+
+The production files will be in: `composeApp\build\dist\wasmJs\productionExecutable\`
+
+### 🚀 Quick Deploy to GitHub Pages
+
+**Option 1: Use the Quick Fix Script**
+```shell
+.\quick-fix-cache.bat
+```
+
+**Option 2: Manual Steps**
+1. Build production: `.\gradlew.bat clean wasmJsBrowserDistribution`
+2. Copy files from `composeApp\build\dist\wasmJs\productionExecutable\` to gh-pages branch
+3. Commit and push to gh-pages branch
+4. Wait 5-10 minutes, then hard refresh (Ctrl+F5)
+
+**Option 3: Automatic Deploy with GitHub Actions**
+- Push to main/master branch
+- GitHub Actions will automatically build and deploy
+- See `.github/workflows/deploy.yml`
+
+### ⚠️ Cache Issues?
+
+If you see old code after deploying:
+1. The `index.html` now includes cache-busting with version parameters
+2. Update the version in `composeApp/src/webMain/resources/index.html` before each deploy
+3. Clear browser cache: Ctrl+Shift+Delete
+4. Hard refresh: Ctrl+F5
+5. Test in incognito mode
+
+**See [DEPLOYMENT_GUIDE.md](./DEPLOYMENT_GUIDE.md) for detailed instructions.**
+
+### 📝 Login Credentials
+
+- Username: `admin`
+- Password: `admin`
+
 ---
 
 Learn more about [Kotlin Multiplatform](https://www.jetbrains.com/help/kotlin-multiplatform-dev/get-started.html),
